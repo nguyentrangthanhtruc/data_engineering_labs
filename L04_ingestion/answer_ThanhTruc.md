@@ -38,7 +38,7 @@ orders = jdbc(
     numPartitions=4,
     fetchsize="1000",
 )```
-
+```
 ## Todo 2
 ```
 by_ts = jdbc(
@@ -50,6 +50,7 @@ by_ts = jdbc(
     numPartitions=4,
 )
 ```
+
 ## Todo 3
 ```
 out = orders.withColumn("purchase_month", F.date_format("order_purchase_timestamp", "yyyy-MM"))
@@ -60,6 +61,7 @@ out.write.mode("overwrite").partitionBy("purchase_month").parquet(f"{BASE}/order
 subquery = f"(SELECT * FROM orders WHERE updated_at > '{wm_old}' AND updated_at <= '{wm_new}') AS changed_orders"
 changes = jdbc(spark, dbtable=subquery).withColumn("_ingested_at", F.lit(wm_new).cast("timestamp"))
 ```
+
 ## Todo 5
 ```
 window_spec = Window.partitionBy("order_id").orderBy(F.col("updated_at").desc(), F.col("_ingested_at").desc())
