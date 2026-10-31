@@ -19,7 +19,7 @@
 >
 > current_word, current_count = None, 0
 >
-> for line in sys.stdin:
+>  for line in sys.stdin:
 >     word, _, count = line.rstrip("\n").partition("\t")
 >     count = int(count)
 >
@@ -83,11 +83,11 @@
 | **Map output materialized bytes** | 31,039,071 | 41,169 |
 | **Reduce shuffle bytes** | 31,039,071 | 41,169 |
 | **Reduce input records** | 1,000,000 | 1,382 |
-| **Wall-clock time**      | ~178s | ! ~110s |
+| **Wall-clock time**      | ~178s | ~110s |
 
 - **Top Zone thu được:**
-  1. `Queens/JFK Airport` (59,777)[cite: 5]
-  2. `Manhattan/Midtown Center` (48,750)[cite: 5]
+  + `Queens/JFK Airport` (59,777)
+  + `Manhattan/Midtown Center` (48,750)
 
 - **Nhận xét:**
   + Khi dùng Combiner, lượng dữ liệu truyền qua mạng (**Reduce shuffle bytes**) giảm từ ~31 MB xuống chỉ còn ~41 KB (giảm hơn 99%).
@@ -117,13 +117,13 @@
 
 ### 5.
 - **In the lecture note scenario (Why it wasn't faster on the sample run):**
-  In Hadoop Streaming, using a Combiner requires spawning an extra Python sub-process (`python3 reducer.py`)[cite: 4]. On a single-node Docker setup with fast local network, the CPU overhead of passing data back and forth between Java and Python streaming pipes can sometimes exceed the time saved from network reduction, making the run slightly slower[cite: 5].
+  In Hadoop Streaming, using a Combiner requires spawning an extra Python sub-process (`python3 reducer.py`). On a single-node Docker setup with fast local network, the CPU overhead of passing data back and forth between Java and Python streaming pipes can sometimes exceed the time saved from network reduction, making the run slightly slower
 
 - **In my actual execution (Why my Combiner run WAS faster: ~1m50s vs ~2m58s):**
-  In my actual run, using the Combiner reduced the Shuffle data volume from **31,039,071 bytes (1,000,000 records)** down to just **41,169 bytes (1,382 records)**—a >99.8% reduction[cite: 5]. This massive reduction drastically saved Disk I/O, buffer serialization, and sorting time at the Reducer stage[cite: 5]. The time saved during Shuffle and Reduce phases (~1m50s vs ~2m58s) significantly outweighed the Python process overhead[cite: 5].
+  In my actual run, using the Combiner reduced the Shuffle data volume from **31,039,071 bytes (1,000,000 records)** down to just **41,169 bytes (1,382 records)**—a >99.8% reduction. This massive reduction drastically saved Disk I/O, buffer serialization, and sorting time at the Reducer stage. The time saved during Shuffle and Reduce phases (~1m50s vs ~2m58s) significantly outweighed the Python process overhead.
 
 - **When would a Combiner be much faster?**
-  A Combiner will show dramatic speedups on large-scale, multi-node physical clusters processing terabytes of data, where physical network bandwidth and Disk I/O are the primary system bottlenecks[cite: 5].
+  A Combiner will show dramatic speedups on large-scale, multi-node physical clusters processing terabytes of data, where physical network bandwidth and Disk I/O are the primary system bottlenecks.
 
 ### 6.
 - No, because avearge is non-associative
