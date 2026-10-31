@@ -4,12 +4,12 @@
 # Part 1 — Sqoop (legacy) 
 ## TODO 1.2
 - Import
-    sqoop import $CONN --table customers \
-      --split-by customer_zip_code_prefix -m 4 \
-      --null-string '\\N' --null-non-string '\\N' \
-      --target-dir /data/olist/sqoop/customers_full --delete-target-dir
+      sqoop import $CONN --table customers \
+        --split-by customer_zip_code_prefix -m 4 \
+        --null-string '\\N' --null-non-string '\\N' \
+        --target-dir /data/olist/sqoop/customers_full --delete-target-dir
 - Count rows
-    for f in $(hdfs dfs -ls -C /data/olist/sqoop/customers_full/part-m-*); do echo "$f $(hdfs dfs -cat $f | wc -l)"; done
+      for f in $(hdfs dfs -ls -C /data/olist/sqoop/customers_full/part-m-*); do echo "$f $(hdfs dfs -cat $f | wc -l)"; done
 - Result
   + /data/olist/sqoop/customers_full/part-m-00000 2450
   + /data/olist/sqoop/customers_full/part-m-00001 1146
