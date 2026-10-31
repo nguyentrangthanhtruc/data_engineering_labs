@@ -36,8 +36,8 @@ orders = jdbc(
     lowerBound=str(b.lo),
     upperBound=str(b.hi),
     numPartitions=4,
-    fetchsize="1000",
-)```
+    fetchsize="1000"
+)
 ```
 ## Todo 2
 ```
@@ -47,7 +47,7 @@ by_ts = jdbc(
     partitionColumn="order_purchase_timestamp",
     lowerBound="2017-01-01 00:00:00",
     upperBound="2018-09-01 00:00:00",
-    numPartitions=4,
+    numPartitions=4
 )
 ```
 
