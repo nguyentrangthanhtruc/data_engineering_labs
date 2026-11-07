@@ -62,13 +62,14 @@ TBLPROPERTIES ('skip.header.line.count' = '1');
 
 ## 4. Partitioned ORC and Parquet tables (sql/02_partitioned_tables.sql)
 ### To do 2
--- TODO 2: dynamic partitioning is "strict" by default (at least one static partition value
---         required). Set hive.exec.dynamic.partition.mode so ALL partition values can be dynamic.
-    SET hive.exec.dynamic.partition.mode = nonstrict;
+TODO 2: dynamic partitioning is "strict" by default (at least one static partition value required). Set hive.exec.dynamic.partition.mode so ALL partition values can be dynamic.
+
+    ```SET hive.exec.dynamic.partition.mode = nonstrict;```
 
 ### To do 3
  --NULL /* TODO 3: replace NULL by an expression that turns tpep_pickup_datetime into 'yyyy-MM' */
-       date_format(tpep_pickup_datetime, 'yyyy-MM') AS pickup_month
+ 
+       ```date_format(tpep_pickup_datetime, 'yyyy-MM') AS pickup_month```
 
 ### Todo 4
 -- TODO 4: create trips_parquet: same columns and partitioning as trips_orc, STORED AS PARQUET
