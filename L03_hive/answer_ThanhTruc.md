@@ -117,6 +117,7 @@ FROM trips_csv t;
 | Query | CSV | ORC | Parquet |
 | :--- | :--- | :--- | :--- |
 | **Q1: Top pickup zones Jan 2024** | 27.42 s | 14.356 s | 17.811 s |
+
 Q2 (ORC): 11.646s
 Q1 top row: zone 132 (JFK) — 145240 trips in the whole sample, avg fare ≈ 59.4. Q2 shows trips per borough (Manhattan ≈ 89.3 %).
 
