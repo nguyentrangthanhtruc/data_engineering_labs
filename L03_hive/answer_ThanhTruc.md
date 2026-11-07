@@ -145,6 +145,7 @@ SELECT count(*) FROM trips_orc WHERE tpep_pickup_datetime >= '2024-01-01' AND tp
 
 
 -- TODO 6: bucket by pulocationid into 4 buckets, sorted by pulocationid
+
     CLUSTERED BY (pulocationid) SORTED BY (pulocationid ASC) INTO 4 BUCKETS
 ----------------------------------------------------------
 ## Checkpoint
